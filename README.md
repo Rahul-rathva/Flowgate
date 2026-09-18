@@ -110,12 +110,5 @@ npm install
 npm test
 ```
 
-## Roadmap / good next additions
-- [ ] Add per-route rate limit configs (different limits for different endpoints)
-- [ ] Add a token-bucket algorithm as an alternative strategy, benchmark vs sliding window
-- [ ] Add request/response caching for GET routes
-- [ ] Add circuit breaker for downstream failures
-- [ ] Wire up Grafana dashboard reading from `/metrics`
-
 ## License
 MIT
