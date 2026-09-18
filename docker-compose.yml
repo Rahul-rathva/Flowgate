@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: flowgate_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  mock-service:
+    build: ./mock-service
+    container_name: flowgate_mock_service
+    restart: unless-stopped
+
+  gateway:
+    build: .
+    container_name: flowgate_gateway
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - DOWNSTREAM_URL=http://mock-service:4000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+      - mock-service
